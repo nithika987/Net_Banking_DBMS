@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Customer Dashboard - Net Banking</title>
+</head>
+<body>
+    <div class="navbar">
+        <h1>Welcome, {{ customer.customer_name }}</h1>
+        <a href="/">Home</a>
+        <a href="/logout">Logout</a>
+    </div>
+    <div class="container">
+        <h2>Your Account Details</h2>
+        <p><strong>Bank:</strong> {{ bank.bank_name }}</p>
+        <p><strong>Branch:</strong> {{ branch.branch_name }}</p>
+        <p><strong>Account Balance:</strong> {{ account.balance }}</p>
+    </div>
+</body>
+</html>
