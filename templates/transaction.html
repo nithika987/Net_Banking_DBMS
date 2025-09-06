@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction - Net Banking</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        // JavaScript function to show/hide recipient field for transfers
+        function toggleRecipientField() {
+            const transactionType = document.getElementById('transaction_type').value;
+            const recipientField = document.getElementById('recipient_account_id_field');
+            recipientField.style.display = (transactionType === 'transfer') ? 'block' : 'none';
+        }
+    </script>
+</head>
+<body>
+    <div class="sidebar">
+        <h3>Dashboard</h3>
+        <a href="/dashboard">Home</a>
+        <a href="/transaction">Transactions</a>
+        <a href="/view_beneficiary">Manage Beneficiaries</a>
+        <a href="/transaction_history">Transaction History</a>
+        <a href="/view_fds">View FDs</a>
+    </div>
+
+    <div class="main-content">
+        <div class="container">
+            <h1>Make a Transaction</h1>
+            <form action="{{ url_for('transaction') }}" method="post">
+                <!-- Account ID -->
+                <label for="account_id">Account ID:</label>
+                <input type="text" id="account_id" name="account_id" required placeholder="Enter Account ID">
+
+                <!-- Transaction Type -->
+                <label for="transaction_type">Transaction Type:</label>
+                <select name="transaction_type" id="transaction_type" required onchange="toggleRecipientField()">
+                    <option value="deposit">Deposit</option>
+                    <option value="withdrawal">Withdrawal</option>
+                    <option value="transfer">Transfer</option>
+                </select>
+
+                <!-- Recipient Account ID (for transfers only) -->
+                <div id="recipient_account_id_field" style="display: none;">
+                    <label for="recipient_account_id">Recipient Account ID:</label>
+                    <input type="text" id="recipient_account_id" name="recipient_account_id" placeholder="Enter Recipient Account ID">
+                </div>
+
+                <!-- Amount -->
+                <label for="amount">Amount:</label>
+                <input type="number" step="0.01" name="amount" id="amount" required placeholder="Enter Amount">
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn primary-btn">Submit Transaction</button>
+
+                <!-- Error/Message Display -->
+                {% if message %}
+                    <p class="alert">{{ message }}</p>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</body>
+</html>

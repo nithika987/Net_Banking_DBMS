@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Beneficiary - Net Banking</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <!-- Sidebar for Navigation -->
+  <div class="sidebar">
+    <h3>Dashboard</h3>
+    <a href="/dashboard">Home</a>
+    <a href="/transaction">Transactions</a>
+    <a href="/view_beneficiary">Manage Beneficiaries</a>
+    <a href="/transaction_history">Transaction History</a> <!-- Account ID dynamically included -->
+    <a href="/view_fds">View FDs</a>
+  </div>
+
+  <div class="main-content">
+    <div class="container">
+      <h1>Edit Beneficiary</h1>
+
+      <!-- Message Display for Success -->
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <ul>
+            {% for category, message in messages %}
+              <li class="alert {{ category }}">{{ message }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+
+      <!-- Edit Beneficiary Form -->
+      <form action="/edit_beneficiary/2" method="post">
+
+
+        <!-- Beneficiary Name -->
+        <label for="beneficiary_name">Beneficiary Name:</label>
+        <input type="text" id="beneficiary_name" name="beneficiary_name" value="{{ beneficiary.beneficiary_name }}" required placeholder="Enter Beneficiary Name">
+
+        <!-- Beneficiary Account Number -->
+        <label for="beneficiary_account_no">Beneficiary Account Number:</label>
+        <input type="text" id="beneficiary_account_no" name="beneficiary_account_no" value="{{ beneficiary.beneficiary_account_no }}" required placeholder="Enter Account Number">
+
+        <!-- Beneficiary Type -->
+        <label for="beneficiary_type">Beneficiary Type:</label>
+        <input type="text" id="beneficiary_type" name="beneficiary_type" value="{{ beneficiary.beneficiary_type }}" required placeholder="Enter Account Type (e.g., Savings, Current)">
+
+        <!-- IFSC Code -->
+        <label for="ifsc_code">IFSC Code:</label>
+        <input type="text" id="ifsc_code" name="ifsc_code" value="{{ beneficiary.ifsc_code }}" required placeholder="Enter IFSC Code">
+
+        <!-- Account ID -->
+        <label for="account_id">Account ID:</label>
+        <input type="text" id="account_id" name="account_id" value="{{ beneficiary.account_id }}" required placeholder="Enter Your Account ID">
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn primary-btn">Update Beneficiary</button>
+      </form>
+
+      <!-- Back to Manage Beneficiaries Link -->
+      <br>
+      <a href="{{ url_for('view_beneficiary') }}" class="btn back-btn">Back to Manage Beneficiaries</a>
+    </div>
+  </div>
+
+  <!-- Add your JavaScript for handling confirmation dialogs or other logic here if needed -->
+</body>
+</html>

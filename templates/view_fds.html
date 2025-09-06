@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Fixed Deposits</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="sidebar">
+        <h3>Dashboard</h3>
+        <a href="/dashboard">Home</a>
+        <a href="/transaction">Transactions</a>
+        <a href="/view_beneficiary">Manage Beneficiaries</a>
+        <a href="/transaction_history/{{ account_id }}">Transaction History</a>
+        <a href="/view_fds">View FDs</a>
+    </div>
+
+    <!-- Main Content Section -->
+    <div class="main-content">
+        <!-- Manager Dashboard Heading -->
+        <h1 class="dashboard-heading" style="margin-left: 30px;">View Fixed Deposits</h1>
+
+        <!-- FD Table Section -->
+        <table style="margin-left: 30px;">
+            <thead>
+                <tr>
+                    <th>FD Amount</th>
+                    <th>Duration (months)</th>
+                    <th>Interest Rate (%)</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for fd in fds %}
+                <tr>
+                    <td>${{ "{:.2f}".format(fd[0]) }}</td>
+                    <td>{{ fd[1] }}</td>
+                    <td>{{ fd[2] }}</td>
+                    <td>{{ fd[3] }}</td>
+                    <td>{{ fd[4] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+</body>
+</html>

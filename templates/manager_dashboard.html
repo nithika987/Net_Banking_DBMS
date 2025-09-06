@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manager Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="sidebar">
+        
+        
+    </div>
+    <h1>Manager Dashboard</h1>
+    <div class="main-content">
+    <h2>Manager Details</h2>
+    <div class="container">
+    {% if manager %}
+        <ul>
+            <li><strong>Employee ID:</strong> {{ manager[0] }}</li>
+            <li><strong>Name:</strong> {{ manager[1] }}</li>
+            <li><strong>Position:</strong> {{ manager[2] }}</li>
+            <li><strong>Salary:</strong> {{ manager[3] }}</li>
+            <li><strong>Branch ID:</strong> {{ manager[4] }}</li>
+            <li><strong>Bank ID:</strong> {{ manager[5] }}</li>
+            <li><strong>Date of Joining:</strong> {{ manager[6] }}</li>
+            <li><strong>Email:</strong> {{ manager[7] }}</li>
+            <li><strong>Phone:</strong> {{ manager[8] }}</li>
+        </ul>
+    {% else %}
+        <p>{{ error }}</p>
+    {% endif %}
+</div>
+    <h2>Customers in Branch</h2>
+    <div class="container">
+    {% if customers %}
+        <ul>
+            {% for customer in customers %}
+                <li><strong>Customer ID:</strong> {{ customer[0] }}</li>
+                <li><strong>Name:</strong> {{ customer[1] }}</li>
+                <hr>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No customers found in this branch.</p>
+    {% endif %}
+</div>
+</div>
+    <a href="/logout">Logout</a>
+</body>
+</html>

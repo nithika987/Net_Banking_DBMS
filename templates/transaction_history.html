@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction History</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="sidebar">
+        <h3>Dashboard</h3>
+        <a href="/dashboard">Home</a>
+        <a href="/transaction">Transactions</a>
+        <a href="/view_beneficiary">Manage Beneficiaries</a>
+        <a href="/transaction_history/{{ account_id }}">Transaction History</a>
+        <a href="/view_fds">View FDs</a>
+    </div>
+
+    <!-- Main Content Section -->
+    <div class="main-content">
+        <!-- Transaction History Heading -->
+        <h1 class="dashboard-heading" style="margin-left: 30px;">Transaction History</h1>
+
+        <!-- Current Balance Section -->
+        {% if current_balance is not none %}
+        <h2 class="current-balance" style="margin-left: 30px;">Current Balance: ${{ "{:.2f}".format(current_balance) }}</h2>
+        {% endif %}
+
+        <!-- Message Alert -->
+        {% if message %}
+            <div class="alert">
+                <p>{{ message }}</p>
+            </div>
+        {% endif %}
+
+        <!-- Date Filter Form -->
+        <form action="{{ url_for('transaction_history', account_id=account_id) }}" method="GET" style="margin-left: 30px;">
+            <label for="start_date">Start Date:</label>
+            <input type="date" id="start_date" name="start_date" value="{{ request.args.get('start_date') }}">
+            <label for="end_date">End Date:</label>
+            <input type="date" id="end_date" name="end_date" value="{{ request.args.get('end_date') }}">
+            <button type="submit">Filter</button>
+        </form>
+
+        <!-- Transaction Table -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Transaction ID</th>
+                    <th>Date</th>
+                    <th>Type</th>
+                    <th>Amount</th>
+                    <th>Account Type</th>
+                    <th>Recipient Account ID</th> <!-- New Column for Recipient Account ID -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for transaction in transactions %}
+                <tr>
+                    <td>{{ transaction[0] }}</td>
+                    <td>{{ transaction[1] }}</td>
+                    <td>{{ transaction[2] }}</td>
+                    <td>${{ "{:.2f}".format(transaction[3]) }}</td>
+                    <td>{{ transaction[4] }}</td>
+                    <td>{{ transaction[6] }}</td> <!-- Displaying Recipient Account ID -->
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+    </div>
+
+</body>
+</html>

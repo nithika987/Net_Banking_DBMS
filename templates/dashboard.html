@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Net Banking Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        let loginAttempts = {{ session.get('login_attempts', 0) }};
+        
+        function checkLoginAttempts() {
+            if (loginAttempts >= 3) {
+                alert("Warning: You have reached 3 failed login attempts. Please try again later or reset your password.");
+            }
+        }
+        // Trigger alert for matured FDs
+        {% if alerts %}
+            alert("You have a matured FD. Please check your dashboard for details.");
+        {% endif %}
+    </script>
+</head>
+<body onload="checkLoginAttempts()">
+    <!-- Sidebar for Navigation -->
+    <!-- Sidebar for Navigation -->
+<div class="sidebar">
+    <h3>Dashboard</h3>
+    <a href="/dashboard">Home</a>
+    <a href="/transaction">Transactions</a>
+    <a href="/view_beneficiary">Manage Beneficiaries</a>
+    <a href="/transaction_history/{{ accounts[0][0] }}">Transaction History</a> <!-- Account ID dynamically included -->
+    <a href="/view_fds">View FDs</a>
+</div>
+
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <div class="container">
+            <h1>Welcome, {{ user_name }}!</h1> <!-- Display the user_name -->
+            <p class="greeting">Here's an overview of your accounts and recent activities.</p>
+
+            <!-- Accounts Section -->
+            <h2>Your Accounts</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Account ID</th>
+                        <th>Account Type</th>
+                        <th>Balance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for account in accounts %}
+                        <tr>
+                            <td>{{ account[0] }}</td>
+                            <td>{{ account[1] }}</td>
+                            <td>${{ "{:.2f}".format(account[2]) }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <!-- Transaction and Beneficiary Links -->
+            <div class="dashboard-actions">
+                <a href="/transaction" class="btn primary-btn">Make a Transaction</a>
+                <a href="/view_beneficiary" class="btn secondary-btn">Manage Beneficiaries</a>
+                <a href="/transaction_history/{{ accounts[0][0] }}" class="btn secondary-btn">Transaction History</a> <!-- Account ID passed dynamically -->
+            </div>
+            <!-- Your Pending Fixed Deposits Section -->
+        {% if pending_fds %}
+        <h3>Your Pending Fixed Deposits</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>FD ID</th>
+                    <th>Amount</th>
+                    <th>Duration (Months)</th>
+                    <th>Interest Rate (%)</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for fd in pending_fds %}
+                    <tr>
+                        <td>{{ fd[0] }}</td>
+                        <td>{{ fd[1] }}</td>
+                        <td>{{ fd[2] }}</td>
+                        <td>{{ fd[3] }}</td>
+                        <td>{{ fd[4] }}</td>
+                        <td>{{ fd[5] }}</td>
+                        <td>{{ fd[6] }}</td>
+                        <td>
+                            {% if fd[6] == 'Pending' %}
+                            <form action="{{ url_for('accept_fd', fd_id=fd[0]) }}" method="post">
+                                <button type="submit">Accept</button>
+                            </form>
+                            <form action="{{ url_for('reject_fd', fd_id=fd[0]) }}" method="post">
+                                <button type="submit">Reject</button>
+                            </form>
+                
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+    <!-- Matured Fixed Deposits Section -->
+    {% if alerts %}
+    <h3>Matured Fixed Deposits</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>FD ID</th>
+                <th>Amount</th>
+                <th>End Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for alert in alerts %}
+                <tr>
+                    <td>{{ alert[0] }}</td>
+                    <td>{{ alert[1] }}</td>
+                    <td>{{ alert[2] }}</td>
+                    <td>
+                        <form action="{{ url_for('renew_fd', fd_id=alert[0]) }}" method="post" style="display:inline;">
+                            <button type="submit">Renew</button>
+                        </form>
+                        <form action="{{ url_for('withdraw_fd', fd_id=alert[0]) }}" method="post" style="display:inline;">
+                            <button type="submit">Withdraw</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
+    <!-- Navigation Links -->
+    <a href="{{ url_for('view_fds') }}">View Fixed Deposits</a>
+            <!-- Logout Link -->
+            <a href="/logout" class="logout-link">Logout</a>
+        </div>
+    </div>
+    
+</body>
+</html>
