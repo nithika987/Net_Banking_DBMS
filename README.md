@@ -1,11 +1,6 @@
 # 🏦 Net Banking Database Management System  
 
-<img src="https://img.shields.io/badge/Python-3.10+-blue?logo=python&logoColor=white" alt="Python" />
-<img src="https://img.shields.io/badge/MySQL-Database-orange?logo=mysql&logoColor=white" alt="MySQL" />
-<img src="https://img.shields.io/badge/Flask-Framework-black?logo=flask&logoColor=white" alt="Flask" />
-<img src="https://img.shields.io/badge/HTML-Frontend-red?logo=html5&logoColor=white" alt="HTML" />
-<img src="https://img.shields.io/badge/CSS-Styling-blue?logo=css3&logoColor=white" alt="CSS" />
-<img src="https://img.shields.io/badge/GitHub-Version_Control-lightgrey?logo=github" alt="GitHub" />
+![Python](https://img.shields.io/badge/Python-3.10+-blue?logo=python&logoColor=white) ![MySQL](https://img.shields.io/badge/MySQL-Database-orange?logo=mysql&logoColor=white) ![Flask](https://img.shields.io/badge/Flask-Framework-black?logo=flask&logoColor=white) ![HTML](https://img.shields.io/badge/HTML-Frontend-red?logo=html5&logoColor=white) ![CSS](https://img.shields.io/badge/CSS-Styling-blue?logo=css3&logoColor=white) ![GitHub](https://img.shields.io/badge/GitHub-Version_Control-lightgrey?logo=github)
 
 🚀 A comprehensive **DBMS project** simulating real-world Net Banking operations.  
 This project provides secure, efficient, and user-friendly online banking functionalities such as **account management, fund transfers, transaction history, beneficiary management, fixed deposits, and more**.  
