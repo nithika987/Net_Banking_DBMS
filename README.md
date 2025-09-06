@@ -1,11 +1,11 @@
 # 🏦 Net Banking Database Management System  
 
-![Python](https://img.shields.io/badge/Python-3.10+-blue?logo=python&logoColor=white)  
-![MySQL](https://img.shields.io/badge/MySQL-Database-orange?logo=mysql&logoColor=white)  
-![Flask](https://img.shields.io/badge/Flask-Framework-black?logo=flask&logoColor=white)  
-![HTML](https://img.shields.io/badge/HTML-Frontend-red?logo=html5&logoColor=white)  
-![CSS](https://img.shields.io/badge/CSS-Styling-blue?logo=css3&logoColor=white)  
-![GitHub](https://img.shields.io/badge/GitHub-Version_Control-lightgrey?logo=github)  
+<img src="https://img.shields.io/badge/Python-3.10+-blue?logo=python&logoColor=white" alt="Python" />
+<img src="https://img.shields.io/badge/MySQL-Database-orange?logo=mysql&logoColor=white" alt="MySQL" />
+<img src="https://img.shields.io/badge/Flask-Framework-black?logo=flask&logoColor=white" alt="Flask" />
+<img src="https://img.shields.io/badge/HTML-Frontend-red?logo=html5&logoColor=white" alt="HTML" />
+<img src="https://img.shields.io/badge/CSS-Styling-blue?logo=css3&logoColor=white" alt="CSS" />
+<img src="https://img.shields.io/badge/GitHub-Version_Control-lightgrey?logo=github" alt="GitHub" />
 
 🚀 A comprehensive **DBMS project** simulating real-world Net Banking operations.  
 This project provides secure, efficient, and user-friendly online banking functionalities such as **account management, fund transfers, transaction history, beneficiary management, fixed deposits, and more**.  
@@ -109,7 +109,8 @@ Security, scalability, and usability are core to the design.
 
 - 👥 **Beneficiary Management** (Add/View/Edit/Delete)
 
-<img width="323" height="383" alt="image" src="https://github.com/user-attachments/assets/57eeee20-aa54-46a4-af3c-f1524b818952" />
+<img width="778" height="339" alt="image" src="https://github.com/user-attachments/assets/1d91fbfc-963a-4c22-95aa-46460fe55fda" />
+<img width="521" height="357" alt="image" src="https://github.com/user-attachments/assets/0c2ec373-6316-49f6-9b65-006a1338eb67" />
 
 - 📈 **Fixed Deposit Management** (View/Accept/Reject/Renew)  
 
