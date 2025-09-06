@@ -10,7 +10,7 @@ app.secret_key = 'your_secret_key'
 db = mysql.connector.connect(
     host="localhost",
     user="root",  # replace with your MySQL username
-    password="eshSpecialtopic78",  # replace with your MySQL password
+    password="*",  # replace with your MySQL password
     database="net_banking"
 )
 cursor = db.cursor()
@@ -685,4 +685,5 @@ def logout():
     return redirect(url_for('home'))
 
 if __name__ == '__main__':
+
     app.run(debug=True)
